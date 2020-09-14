@@ -1,18 +1,51 @@
-# Build and Release Folders
-bin-debug/
-bin-release/
-[Oo]bj/
-[Bb]in/
+import os,time,sys,shutil
 
-# Other files and folders
-.settings/
+class Main:
 
-# Executables
-*.swf
-*.air
-*.ipa
-*.apk
+	def __init__(self):
+		self.detekos()
 
-# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
-# should NOT be excluded as they contain compiler settings and other important
-# information for Eclipse / Flash Builder.
+	def menu(self):
+		print("""
+		;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+		;       S P A M  S M S      ;
+		;---------------------------;
+		;       Author : rakha     ;
+		;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+NOTE: This tool's only work for Indonesia number phone.
+1. SMS Gratis
+2. OTP Matahari
+3. OTP Hallodok
+4. OTP Olx.co.id
+5. OTP Sociolla.com
+""")
+		pilih=int(input('noobie/> '))
+		if pilih == 1:
+			import src.payu
+		elif pilih == 2:
+			import src.matahari
+		elif pilih == 3:
+			import src.alodok
+		elif pilih == 4:
+			import src.olx
+		elif pilih == 5:
+			import src.socil
+		else: print("[!] lihat menu dong(o)");self.menu()
+
+	def detekos(self):
+		#remove cache
+		try:
+			shutil.rmtree("src/__pycache__")
+		except: pass
+
+		if os.name in ['nt','win32']:
+			os.system('cls')
+		else: os.system('clear')
+		self.menu()
+
+try:
+	Main()
+except KeyboardInterrupt:
+	exit('[Exit] Key interrupt')
+except Exception as F:
+	print('Err: %s'%(F))
